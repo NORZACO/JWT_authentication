@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -5,6 +6,11 @@ const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
+const JWTverifier = require('./middleware/verifyJWT');
+// Cookie parser
+const cookieParser = require('cookie-parser');
+
+
 const PORT = process.env.PORT || 3500;
 
 // custom middleware logger
@@ -19,6 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 // built-in middleware for json 
 app.use(express.json());
 
+// Cookie parser
+app.use(cookieParser());
+
 //serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
 
@@ -26,6 +35,11 @@ app.use('/', express.static(path.join(__dirname, '/public')));
 app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
+
+app.use('/refresh', require('./routes/refresh'));
+app.use('/logout', require('./routes/logout'));
+
+app.use(JWTverifier);
 app.use('/employees', require('./routes/api/employees'));
 
 app.all('*', (req, res) => {
