@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
-    "token": "nodemon app.js"
+    "token": "nodemon generate_random_string.js"
   },
   "author": "Mwamuzi Shadrick",
   "license": "ISC",

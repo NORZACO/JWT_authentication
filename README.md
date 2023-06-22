@@ -3,6 +3,23 @@
 
 **Description:**
 
+This is a tutorial on how you can implement user authorization in your Express application using PassportJS,
+
+## Get Started
+To get started with this project:
+1) Clone or download repository from GitHub
+   
+   ```bash
+   git clone https://github.com/NORZACO/JWT_authentication.git
+
+   cd JWT_authentication
+
+   npm install
+
+   npm run token
+
+   npm run dev
+   ```
 
 
 
